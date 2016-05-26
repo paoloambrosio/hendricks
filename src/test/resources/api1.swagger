@@ -1,0 +1,47 @@
+swagger: '2.0'
+x-hendricks: '1.0'
+
+info:
+  title: 'First API'
+  version: '1'
+
+responses:
+  DefaultErrors:
+    description: Default errors
+    schema:
+      $ref: '#/definitions/Error'
+    x-scenarios:
+      - description: Something invalid
+        x-httpstatus: 400
+        x-body:
+          - '$.code': '123'
+      - description: Unexpected errors
+        x-httpstatus: 500
+        x-body:
+          - '$.code': '000'
+
+paths:
+  /status:
+    get:
+      summary: Query status
+      responses:
+        200:
+          description: System is healthy
+          schema:
+            $ref: '#/definitions/StatusInformation'
+          x-body:
+            '$.status': OK
+        default:
+          $ref: '#/responses/DefaultErrors'
+
+definitions:
+  StatusInformation:
+    type: object
+    properties:
+      status:
+        type: string
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
