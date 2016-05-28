@@ -14,11 +14,11 @@ responses:
       - description: Something invalid
         x-httpstatus: 400
         x-body:
-          - '$.code': '123'
+          '$.code': '123'
       - description: Unexpected errors
         x-httpstatus: 500
         x-body:
-          - '$.code': '000'
+          '$.code': '000'
 
 paths:
   /status:
